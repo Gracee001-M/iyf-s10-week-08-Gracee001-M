@@ -159,3 +159,73 @@ function Button({
 <>
   // Usage
   <Button text="Submit" variant="primary" /><Button text="Cancel" variant="secondary" /><Button text="Delete" variant="danger" /><Button /> // Uses defaults</>  // Uses defaults
+
+  function Card({ children, title }) {
+    return (
+        <div className="card">
+            {title && <h3 className="card-title">{title}</h3>}
+            <div className="card-body">
+                {children}
+            </div>
+        </div>
+    );
+}
+
+// Usage
+<Card title="Welcome">
+    <p>This is the card content!</p>
+    <button>Click me</button>
+</Card>
+
+<Card>
+    <img src="photo.jpg" alt="Photo" />
+</Card>
+
+function Layout({ children }) {
+    return (
+        <div className="layout">
+            <Header />
+            <main className="main-content">
+                {children}
+            </main>
+            <Footer />
+        </div>
+    );
+}
+
+// Usage
+function App() {
+    return (
+        <Layout>
+            <h1>Home Page</h1>
+            <PostList />
+        </Layout>
+    );
+}
+
+function UserGreeting({ user }) {
+    // Pattern 1: && operator
+    return (
+        <div>
+            {user && <p>Welcome, {user.name}!</p>}
+            {!user && <p>Please log in</p>}
+        </div>
+    );
+
+    // Pattern 2: Ternary operator
+    return (
+        <div>
+            {user ? (
+                <p>Welcome, {user.name}!</p>
+            ) : (
+                <p>Please log in</p>
+            )}
+        </div>
+    );
+
+    // Pattern 3: Early return
+    if (!user) {
+        return <p>Please log in</p>;
+    }
+    return <p>Welcome, {user.name}!</p>;
+}
