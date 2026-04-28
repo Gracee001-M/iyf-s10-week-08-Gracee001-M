@@ -511,3 +511,45 @@ function PostCard({ post, onLike }) {
         </div>
     );
 }
+
+import { useState } from 'react';
+import Header from './components/Layout/Header';
+import Footer from './components/Layout/Footer';
+import Sidebar from './components/Layout/Sidebar';
+import PostList from './components/Post/PostList';
+import CreatePost from './components/Post/CreatePost';
+
+function App() {
+    const [posts, setPosts] = useState([
+        { id: 1, title: "First Post", excerpt: "Hello world...", author: "Alice", date: "Apr 28, 2026", likes: 0 },
+        { id: 2, title: "Second Post", excerpt: "React is awesome...", author: "Bob", date: "Apr 27, 2026", likes: 0 }
+    ]);
+
+    const handleLike = (id) => {
+        setPosts(posts.map(post =>
+            post.id === id ? { ...post, likes: post.likes + 1 } : post
+        ));
+    };
+
+    const handleDelete = (id) => {
+        setPosts(posts.filter(post => post.id !== id));
+    };
+
+    const handleAdd = (newPost) => {
+        setPosts([newPost, ...posts]);
+    };
+
+    return (
+        <div className="layout">
+            <Header />
+            <Sidebar />
+            <main>
+                <CreatePost onAdd={handleAdd} />
+                <PostList posts={posts} onLike={handleLike} onDelete={handleDelete} />
+            </main>
+            <Footer />
+        </div>
+    );
+}
+
+export default App;
