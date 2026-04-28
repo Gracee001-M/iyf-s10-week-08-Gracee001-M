@@ -12,3 +12,26 @@ function Sidebar() {
 }
 
 export default Sidebar;
+
+function Sidebar() {
+    return (
+        <aside className="sidebar">
+            <section>
+                <h3>About</h3>
+                <p>CommunityHub is a place to share ideas and connect.</p>
+            </section>
+            <section>
+                <h3>Popular Posts</h3>
+                <ul>
+                    <li>Getting Started with React</li>
+                    <li>JavaScript Best Practices</li>
+                </ul>
+            </section>
+            <section>
+                <h3>Tags</h3>
+                <span>#react</span> <span>#javascript</span> <span>#frontend</span>
+            </section>
+        </aside>
+    );
+}
+export default Sidebar;
