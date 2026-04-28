@@ -293,3 +293,95 @@ function UserForm() {
 }
 
 export default UserForm;
+
+function EventExamples() {
+    // Inline handler
+    const handleClick = () => {
+        console.log('Button clicked!');
+    };
+
+    // Handler with event object
+    const handleInput = (event) => {
+        console.log('Input value:', event.target.value);
+    };
+
+    // Handler with custom parameter
+    const handleItemClick = (itemId) => {
+        console.log('Item clicked:', itemId);
+    };
+
+    return (
+        <div>
+            {/* Basic click */}
+            <button onClick={handleClick}>Click Me</button>
+
+            {/* With event */}
+            <input onChange={handleInput} />
+
+            {/* With parameter */}
+            <button onClick={() => handleItemClick(123)}>Item 123</button>
+
+            {/* Prevent default */}
+            <form
+                onSubmit={(e) => {
+                    e.preventDefault();
+                    console.log('Form submitted');
+                }}
+            >
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+    );
+}
+
+import { useState } from 'react';
+
+function ContactForm() {
+    const [formData, setFormData] = useState({
+        name: '',
+        email: '',
+        message: ''
+    });
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFormData((prev) => ({
+            ...prev,
+            [name]: value
+        }));
+    };
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        console.log('Form data:', formData);
+        // Reset form
+        setFormData({ name: '', email: '', message: '' });
+    };
+
+    return (
+        <form onSubmit={handleSubmit}>
+            <input
+                name="name"
+                value={formData.name}
+                onChange={handleChange}
+                placeholder="Your name"
+            />
+            <input
+                name="email"
+                type="email"
+                value={formData.email}
+                onChange={handleChange}
+                placeholder="Your email"
+            />
+            <textarea
+                name="message"
+                value={formData.message}
+                onChange={handleChange}
+                placeholder="Your message"
+            />
+            <button type="submit">Send</button>
+        </form>
+    );
+}
+
+export default ContactForm;
